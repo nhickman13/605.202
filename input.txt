@@ -1,0 +1,5 @@
+poin:AB -C + DEF -+^
+popr:ABCDE -+ ^*EF*-
+prin:++A - * ^BCD/ + EF * GHI
+prpo:+-^ABC * D ** EFG
+inpr:(A+B)*(C^(D-E)+F)–G
