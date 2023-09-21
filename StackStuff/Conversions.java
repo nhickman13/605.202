@@ -1,6 +1,5 @@
 package StackStuff;
 
-
 public class Conversions {
     private static Boolean isOperator(char c) {
         return (c=='+' || c=='-' || c=='*' || c=='/' || c =='^');
@@ -18,12 +17,6 @@ public class Conversions {
         else if (c == '^')
             return 3;
         return 0;
-    }
-    private static Boolean isLeftParenth(char c) {
-        return c == '(';
-    }
-    private static Boolean isRightParenth(char c) {
-        return c == ')';
     }
 
     public static String postfixToInfix(String s) {
