@@ -19,29 +19,42 @@ public class Conversions {
         return 0;
     }
 
-    public static String postfixToInfix(String s) {
-        Stack mainStack = new Stack();
+    public static String prefixToPostfix(String s) {
+        Stack mainStack = new Stack<>();
         String inputString = s;
+        String postfix = "";
         String operand1 = "";
         String operand2 = "";
-        String operator = "";
-        String infix = "";
+        String combo = "";
+        char[] prefixArray = inputString.toCharArray();
+        char element;
+        int length;
 
-        for (int i=0; i < inputString.length(); i++) {
-            if (isOperand(inputString.charAt(i))) {
-                mainStack.push(String.valueOf(inputString.charAt(i)));
+        length = prefixArray.length;
+
+        for(int i = length - 1; i >= 0; i--) {
+            element = prefixArray[i];
+            if(isOperand(element)) {
+                mainStack.push(element + "");
             }
-            else if (isOperator(inputString.charAt(i))) {
-                operand2 = mainStack.pop();
-                operand1 = mainStack.pop();
-                operator = inputString.substring(i,i+1);
-                infix = "(" + operand1 + operator + operand2 + ")";
-                mainStack.push(infix);
+            else if (isOperator(element)) {
+                operand1 = (String) mainStack.pop();
+                operand2 = (String) mainStack.pop();
+                combo = operand1 + operand2 + element;
+                mainStack.push(combo);
             }
         }
-        infix = mainStack.pop();
-        return infix;
+
+        postfix = (String) mainStack.pop();
+        return postfix;
+
     }
+
+    
+    public static String postfixToPrefix(String s) {
+        return infixToPrefix(postfixToInfix(s));
+    }
+
 
     public static String infixToPrefix(String s) {
         Stack operandStack = new Stack();
@@ -95,7 +108,60 @@ public class Conversions {
         }
         return operandStack.peek();
     }
-    public static String postfixToPrefix(String s) {
-        return infixToPrefix(postfixToInfix(s));
+    
+      public static String prefixToInfix(String s) {
+        Stack mainStack = new Stack<>();
+        String inputString = s;
+        String infix = "";
+        String operand1 = "";
+        String operand2 = "";
+        String combo = "";
+        char[] prefixArray = inputString.toCharArray();
+        char element;
+        int length;
+
+        length = prefixArray.length;
+
+        for(int i = length - 1; i >= 0; i--) {
+            element = prefixArray[i];
+            if(isOperand(element)) {
+                mainStack.push(element + "");
+            }
+            else if (isOperator(element)) {
+                operand1 = (String) mainStack.pop();
+                operand2 = (String) mainStack.pop();
+                combo = "(" + operand1 + element + operand2 + ")";
+                mainStack.push(combo);
+            }
+        }
+        infix = (String) mainStack.pop();
+        return infix;
     }
+
+    public static String postfixToInfix(String s) {
+        Stack mainStack = new Stack();
+        String inputString = s;
+        String operand1 = "";
+        String operand2 = "";
+        String operator = "";
+        String infix = "";
+
+        for (int i=0; i < inputString.length(); i++) {
+            if (isOperand(inputString.charAt(i))) {
+                mainStack.push(String.valueOf(inputString.charAt(i)));
+            }
+            else if (isOperator(inputString.charAt(i))) {
+                operand2 = mainStack.pop();
+                operand1 = mainStack.pop();
+                operator = inputString.substring(i,i+1);
+                infix = "(" + operand1 + operator + operand2 + ")";
+                mainStack.push(infix);
+            }
+        }
+        infix = mainStack.pop();
+        return infix;
+    }
+
+    
+    
 }
