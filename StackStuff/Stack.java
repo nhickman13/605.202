@@ -39,9 +39,4 @@ public class Stack {
     public Integer length() {
         return stackLength;
     }
-
-    public ArrayList<String> print() {
-        return stack;
-    }
-
 }
